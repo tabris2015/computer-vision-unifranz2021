@@ -31,6 +31,24 @@ Introducir conceptos, técnicas, aplicaciones y herramientas para sistemas de vi
 
 ---
 
+### Acerca de mi
+
+![bg right 50%](img/profile.png)
+Data Pipeline Engineer
+
+  - ETL, Procesamiento y consolidación de datos
+  - Proveedores en la nube
+  - Sistemas distribuidos, serverless
+  - Scala, Python, SQL
+
+Profesor, Universidad La Salle:
+
+  - Inteligencia Artificial
+  - Aprendizaje Automático
+
+
+---
+
 ### Requisitos
 
   - Programación básica
