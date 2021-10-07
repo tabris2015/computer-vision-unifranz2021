@@ -44,6 +44,7 @@ Usted deberá implementar una clase `Evaluador` en el archivo `estudiantes.py` q
     - En caso de que el diccionario `notas` se encuentre vacìo o simplemente no exista, asigne un promedio final de `0`.
     - En caso de que el estudiante cuente con un porcentaje de asistencia **menor** al valor de `min_asistencia`, asigne un promedio final de `0`.
     - Acumule los puntos extras en el key `extras` y sume el acumulado al promedio final tomando en cuenta que el promedio no debe superar el valor `100`
+    - El acumulado de puntos extra no puede superar el valor de `max_extras`.
     - El método **calcular_promedios** deberá retornar una lista de diccionarios, en la cual cada elemento debe tener los siguientes keys: **nombre completo** con el 
       nombre completo del estudiante con el nombre y apellido capitalizados, ej: "Jorge Canqui" y **promedio** con la nota final del estudiante
     - 
