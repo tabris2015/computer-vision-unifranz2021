@@ -4,3 +4,4 @@ Repo de código para el módulo de visión computacional del diplomado de robót
 
 Este módulo tiene el objetivo de introducir conceptos fundamentales acerca de técnicas de visión computacional para sistemas robóticos.
 
+test
