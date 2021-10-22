@@ -133,3 +133,4 @@ dmypy.json
 .idea/
 
 tensorflow/annotations/
+tensorflow/images/
