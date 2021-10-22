@@ -7,7 +7,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-    - ~/tensorflow_datasets:/root/tensorflow_datasets 
+    - ~/dev/datasets:/datasets 
     - ./:/app
     deploy:
       resources:
