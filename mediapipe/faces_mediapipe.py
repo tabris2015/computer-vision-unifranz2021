@@ -14,7 +14,7 @@ if not cap.isOpened():
     print("No se puede abrir webcam")
 
 
-with face_mesh.FaceMesh( max_num_faces=1, refine_landmarks=True) as mesh_detector:
+with face_mesh.FaceMesh(max_num_faces=1, refine_landmarks=True) as mesh_detector:
     while True:
         # lectura de un frame
         ret, frame = cap.read()

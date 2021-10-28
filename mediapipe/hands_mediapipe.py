@@ -29,30 +29,36 @@ def dist_total(lista_puntos):
     return total
 
 
-def procesar_landmarks(landmarks, umbral=0.1, umbral_palma_abierta=0.6, umbral_palma_cerrada=0.4):
+def procesar_landmarks(landmarks, img_size, umbral=0.1, umbral_palma_abierta=0.6, umbral_palma_cerrada=0.4):
     # data_points = protobuf_to_dict(landmarks)
     data_points = [(dp.x, dp.y, dp.z) for dp in landmarks.landmark]
 
     indice_point = data_points[8]
+    
+    # print(f"indice: ({indice_point[0]:.2f}, {indice_point[1]:.2f})")
+
     pulgar_point = data_points[4]
     medio_point = data_points[12]
     
     dedos = [data_points[4], data_points[8], data_points[12], data_points[16], data_points[20]]
 
     resultado = "-"
+    pos = (0, 0)
 
     if dist_3d(indice_point, pulgar_point) < umbral:
         resultado = "indice!"
+        pos = (int(indice_point[0] * img_size[0]), int(indice_point[1] * img_size[1]))
+
     elif dist_3d(medio_point, pulgar_point) < umbral:
         resultado = "medio!"
-    elif dist_total(dedos) > umbral_palma_abierta:
-        resultado = "abierto!"
-    elif dist_total(dedos) < umbral_palma_cerrada:
-        resultado = "cerrado!"
-        
-    
+        pos = (int(medio_point[0] * img_size[0]), int(medio_point[1] * img_size[1]))
 
-    return resultado
+    # elif dist_total(dedos) > umbral_palma_abierta:
+    #     resultado = "abierto!"
+    # elif dist_total(dedos) < umbral_palma_cerrada:
+    #     resultado = "cerrado!"
+
+    return resultado, pos
 
 # verificar conexion
 if not cap.isOpened():
@@ -63,6 +69,7 @@ with mp_hands.Hands(model_complexity=0) as hands:
     while True:
         # lectura de un frame
         ret, frame = cap.read()
+        # print(frame.shape)
         # operaciones con el frame
         # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
@@ -73,9 +80,17 @@ with mp_hands.Hands(model_complexity=0) as hands:
 
         out = frame.copy()
         for hand_landmarks in results.multi_hand_landmarks:
-            evento = procesar_landmarks(hand_landmarks)
+            evento, pos_evento = procesar_landmarks(hand_landmarks, (frame.shape[1], frame.shape[0]))
             
-            cv2.circle(out, (100, 100), 25, (0, 255, 0), 3)
+            if evento in ("indice!", "medio!"):
+                cv2.circle(
+                    out, 
+                    pos_evento, 
+                    25, 
+                    (0, 255, 0) if evento == "indice!" else (0, 0, 255), 
+                    3
+                    )
+
             cv2.putText(out, evento, (5, 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             
             mp_drawing.draw_landmarks(
