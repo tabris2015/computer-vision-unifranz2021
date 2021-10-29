@@ -10,12 +10,13 @@ fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
 t = np.arange(0, 3, 0.01)
 f_t = 2 * np.sin(2 * np.pi * t)
 
-fig.add_subplot(111).plot(t, f_t)
+dibujo = fig.add_axes([0, 0, 1, 1])
+dibujo.plot(t, f_t)
 
 def dibujar(canvas, figure):
     figure_canvas = FigureCanvasTkAgg(figure, canvas)
     figure_canvas.draw()
-    figure_canvas.get_tk_widget().pack(side="top", fill="both", expand=1)
+    figure_canvas.get_tk_widget().pack(side="top", fill="both", expand=0)
     return figure_canvas
 
 # pysimplegui
@@ -24,7 +25,7 @@ def dibujar(canvas, figure):
 layout = [
     [sg.Text("Funcion plot test")],
     [sg.Canvas(key="-CANVAS-")],
-    [sg.Button("OK")]
+    [sg.Button("OK"), sg.Button("Coseno", key="-BUT COS-")]
 ]
 
 #crear ventana
@@ -39,6 +40,16 @@ window = sg.Window(
 
 dibujar(window["-CANVAS-"].TKCanvas, fig)
 
-event, values = window.read()
+while True:
+    event, values = window.read()
+
+    if event == "OK" or event == sg.WIN_CLOSED:
+        break
+
+    if event == "-BUT COS-":
+        dibujo.plot(t, np.cos(2 * np.pi * t))
+        dibujar(window["-CANVAS-"].TKCanvas, fig)
+
+
 
 window.close()

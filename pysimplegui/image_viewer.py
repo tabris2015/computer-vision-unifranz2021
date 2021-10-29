@@ -15,7 +15,7 @@ file_list_column = [
 
 image_viewer_column = [
     [sg.Text("Escoja una imagen de la lista: ")],
-    [sg.Text(size=(40, 1), key="-TOUT-")],
+    [sg.Text(size=(60, 2), key="-TOUT-")],
     [sg.Image(key="-IMAGE-")]
 ]
 
