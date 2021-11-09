@@ -53,10 +53,10 @@ def procesar_landmarks(landmarks, img_size, umbral=0.1, umbral_palma_abierta=0.6
         resultado = "medio!"
         pos = (int(medio_point[0] * img_size[0]), int(medio_point[1] * img_size[1]))
 
-    # elif dist_total(dedos) > umbral_palma_abierta:
-    #     resultado = "abierto!"
-    # elif dist_total(dedos) < umbral_palma_cerrada:
-    #     resultado = "cerrado!"
+    elif dist_total(dedos) > umbral_palma_abierta:
+        resultado = "abierto!"
+    elif dist_total(dedos) < umbral_palma_cerrada:
+        resultado = "cerrado!"
 
     return resultado, pos
 
