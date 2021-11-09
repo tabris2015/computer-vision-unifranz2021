@@ -141,7 +141,7 @@ GPU Nvidia incorporada.
 
 ## Nvidia Jetson AGX Orin
 
-![bg right 80%](img/jetsonnano.png)
+![bg right 80%](img/orin.png)
 
 GPU Nvidia incorporada.
 
